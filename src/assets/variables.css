@@ -1,0 +1,11 @@
+:root {
+    --font-dark: #21201F;
+    --light-grey: #DBDBDB;
+    --bg-white: #ffffff;
+    --font-grey: #979899;
+    --bg-yellow: hsl(47.9 95.8% 53.1%);
+    --yellow: hsl(47.9 95.8% 53.1%);
+
+    --yellow-20: #FEF5D0;
+    --bg-yellow-20: #FEF5D0;
+}
