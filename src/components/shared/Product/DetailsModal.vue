@@ -65,7 +65,7 @@ import {
   DrawerTitle,
   DrawerTrigger
 } from '@ui/drawer'
-import AddButton from '../AddButton.vue'
+import AddButton from '@shared/Buttons/AddButton.vue'
 import { useRouter } from 'vue-router'
 
 defineProps<{

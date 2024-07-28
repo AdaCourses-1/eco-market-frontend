@@ -18,6 +18,7 @@ body {
   font-family: "DM Sans", sans-serif;
   background-color: #F5F4F2;
   padding-bottom: 100px;
+  overflow-x: hidden;
 }
 
 .container {

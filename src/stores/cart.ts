@@ -42,7 +42,7 @@ export const useCartStore = defineStore(
     }
 
     const removeFromCart = (productId: number): void => {
-      items.value = items.value.filter((cartItem: CartItem) => cartItem.productId != productId);
+      items.value = items.value.filter((cartItem: CartItem) => cartItem.productId != productId)
     }
 
     const increaseQuantity = (productId: number): void => {
@@ -55,7 +55,7 @@ export const useCartStore = defineStore(
 
     const decreaseQuantity = (productId: number): void => {
       const targetItem = items.value.find((item) => item.productId == productId)
-      
+
       if (targetItem) {
         targetItem.quantity--
       }
@@ -63,6 +63,10 @@ export const useCartStore = defineStore(
       if (targetItem && !targetItem.quantity) {
         removeFromCart(productId)
       }
+    }
+
+    const clearCart = (): void => {
+      items.value = []
     }
 
     return {
@@ -74,7 +78,8 @@ export const useCartStore = defineStore(
       addToCart,
       removeFromCart,
       increaseQuantity,
-      decreaseQuantity
+      decreaseQuantity,
+      clearCart
     }
   },
   {

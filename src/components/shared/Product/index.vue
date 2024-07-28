@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import type { Product } from '@/services/productsService'
 import { useCurrencyFormatter } from '@/composables/currencyFormatter'
-import AddButton from '@shared/AddButton.vue'
+import AddButton from '@shared/Buttons/AddButton.vue'
 import { useCartStore } from '@/stores/cart'
 import { computed, reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -104,7 +104,7 @@ const handleDecrement = () => {
     border-radius: 50%;
     background-color: #def9ec;
     border: 5px solid #fff;
-    color: var(--primary);
+    color: hsl(var(--primary));
     display: inline-block;
     width: 54px;
     height: 54px;

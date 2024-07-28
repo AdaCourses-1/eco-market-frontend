@@ -68,8 +68,9 @@ watchDebounced(
 </script>
 
 <style lang="scss">
-.main {
+.main,
+main {
   min-height: 100vh;
-  padding: 20px;
+  padding: 20px 10px;
 }
 </style>

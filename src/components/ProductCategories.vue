@@ -44,7 +44,7 @@ const categories = [
     }
 
     &__all {
-        color: var(--primary);
+        color: hsl(var(--primary));
         font-size: 14px;
         font-weight: 600;
     }

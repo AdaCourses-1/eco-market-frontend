@@ -53,7 +53,7 @@ import SearchInput from './SearchInput.vue';
       gap: 10px;
       font-weight: 600;
       font-size: 16px;
-      color: var(--primary);
+      color: hsl(var(--primary));
     }
   }
 
