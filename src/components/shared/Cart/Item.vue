@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { Product } from '@/services/productsService'
+import type { Product } from '@/services/productsService'
 import CounterButton from '@shared/Buttons/CounterButton.vue'
 import { useCurrencyFormatter } from '@/composables/currencyFormatter'
 
