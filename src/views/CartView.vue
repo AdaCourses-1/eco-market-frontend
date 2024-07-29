@@ -28,7 +28,7 @@ const handleGoBack = () => router.back()
 </script>
 
 <template>
-  <main class="container max-w-5xl mx-auto p-4 pb-8 pt-4">
+  <main class="mx-auto p-4 pt-0 pb-32">
     <div
       class="flex items-center justify-between bg-white shadow-sm rounded-b-sm -mx-5 mb-3 px-4 py-4"
     >
