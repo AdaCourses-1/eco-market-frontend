@@ -37,9 +37,9 @@
           <Separator />
         </div>
       </div>
-      <div class="flex gap-2">
+      <div class="flex gap-2 flex-wrap-reverse">
         <DeleteAccountDialog
-          ><Button variant="link" class="text-red-500">Удалить аккаунт</Button></DeleteAccountDialog
+          ><Button variant="link" class="text-red-500 flex-1">Удалить аккаунт</Button></DeleteAccountDialog
         >
         <Button @click="handleGoHome" variant="secondary" class="flex-1">Выйти из аккаунта</Button>
       </div>
@@ -66,6 +66,6 @@ const handleGoHome = () => router.push('/')
 
 .profile-main {
   height: 100%;
-  min-height: 100%
+  min-height: 100%;
 }
 </style>

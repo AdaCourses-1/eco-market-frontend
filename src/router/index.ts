@@ -16,6 +16,11 @@ const router = createRouter({
       component: CartView
     },
     {
+      path: '/welcome',
+      name: 'welcome',
+      component: () => import('../views/WelcomeView.vue')
+    },
+    {
       path: '/checkout',
       name: 'checkout',
       component: () => import('../views/CheckoutView.vue')
@@ -42,6 +47,16 @@ const router = createRouter({
     } else {
       return { top: 0 }
     }
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  const hasVisited = sessionStorage.getItem('hasVisited')
+  if (!hasVisited && to.name !== 'welcome') {
+    sessionStorage.setItem('hasVisited', 'true')
+    next({ name: 'welcome' })
+  } else {
+    next()
   }
 })
 

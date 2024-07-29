@@ -2,7 +2,7 @@
   <div>
     <NavbarHeader />
 
-    <main class="main content-container p-4 pb-8">
+    <main class="main content-container p-4 pb-32">
       <PromitionsSlider />
       <ProductCategories />
       <div class="mt-10">
@@ -70,7 +70,7 @@ watchDebounced(
 <style lang="scss">
 .main,
 main {
-  min-height: 100vh;
-  padding: 20px 15px;
+  min-height: 80vh;
+  padding: 20px 15px 100px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <AlertDialog class="delete-account" :style="{ width: '80% !important' }">
+  <AlertDialog>
     <AlertDialogTrigger as-child><slot /></AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>

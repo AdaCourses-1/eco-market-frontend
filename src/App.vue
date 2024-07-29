@@ -15,7 +15,7 @@ import BottomNavigation from './components/BottomNavigation.vue'
 <style>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.25s;
 }
 .fade-enter-from,
 .fade-leave-to {
