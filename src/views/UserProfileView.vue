@@ -3,14 +3,22 @@
     <div class="profile-top px-4 pb-12">
       <div class="flex items-center justify-between rounded-b-sm mb-3 py-4">
         <h3 class="text-[#fff] font-semibold text-sm">Привет, Сергей</h3>
-        <div class="bg-white rounded-[50%] p-2 shadow-md">
-          <Settings :size="18" :stroke-width="2" color="#333" />
-        </div>
+        <SettingsDrawer title="Настройки">
+          <div class="bg-white rounded-[50%] p-2 shadow-md">
+            <Settings :size="18" :stroke-width="2" color="#333" />
+          </div>
+        </SettingsDrawer>
       </div>
       <div class="flex gap-2">
         <Card title="Избранные товары" subtitle="2 товара" />
         <Card title="История заказов" subtitle="9 заказов" />
-        <Card title="Адреса доставки" subtitle="1 адрес" />
+        <AddressesDrawer>
+          <Card
+            class="min-h-full"
+            title="Адреса доставки"
+            :subtitle="`Адресов : ${addressCount}`"
+          />
+        </AddressesDrawer>
       </div>
     </div>
     <main class="main content-container p-4 pb-8 profile-main bg-white shadow-sm -mt-4 rounded-xl">
@@ -39,7 +47,9 @@
       </div>
       <div class="flex gap-2 flex-wrap-reverse">
         <DeleteAccountDialog
-          ><Button variant="link" class="text-red-500 flex-1">Удалить аккаунт</Button></DeleteAccountDialog
+          ><Button variant="link" class="text-red-500 flex-1"
+            >Удалить аккаунт</Button
+          ></DeleteAccountDialog
         >
         <Button @click="handleGoHome" variant="secondary" class="flex-1">Выйти из аккаунта</Button>
       </div>
@@ -47,17 +57,33 @@
   </div>
 </template>
 <script setup lang="ts">
+import AddressesDrawer from '@/components/shared/Profile/AddressesDrawer.vue'
 import Card from '@/components/shared/Profile/Card.vue'
 import DeleteAccountDialog from '@/components/shared/Profile/DeleteAccountDialog.vue'
+import SettingsDrawer from '@/components/shared/Profile/SettingsDrawer.vue'
 import Button from '@/components/ui/button/Button.vue'
 import Label from '@/components/ui/label/Label.vue'
 import Separator from '@/components/ui/separator/Separator.vue'
+import { getFromLocalStorage } from '@/composables/useLocalStorage'
 import { Settings } from 'lucide-vue-next'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-
+const addressCount = ref<number>(0)
 const handleGoHome = () => router.push('/')
+
+const getAddresses = () => {
+  const savedAddresses = getFromLocalStorage('addresses')
+
+  if (savedAddresses) {
+    addressCount.value = savedAddresses.length
+  }
+}
+
+onMounted(() => {
+  getAddresses()
+})
 </script>
 <style lang="scss">
 .profile-top {
