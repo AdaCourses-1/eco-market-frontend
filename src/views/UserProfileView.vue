@@ -3,7 +3,11 @@
     <div class="profile-top px-4 pb-12">
       <div class="flex items-center justify-between rounded-b-sm mb-3 py-4">
         <h3 class="text-[#fff] font-semibold text-sm">Привет, Сергей</h3>
-        <SettingsDrawer title="Настройки">
+        <SettingsDrawer
+          title="Настройки"
+          :isOpen="isProfileSettingsOpen"
+          @on-close="handleCloseProfileSettingDrawer"
+        >
           <div class="bg-white rounded-[50%] p-2 shadow-md">
             <Settings :size="18" :stroke-width="2" color="#333" />
           </div>
@@ -16,7 +20,7 @@
           <Card
             class="min-h-full"
             title="Адреса доставки"
-            :subtitle="`Адресов : ${addressCount}`"
+            :subtitle="`Адресов : ${profile.addresses.length}`"
           />
         </AddressesDrawer>
       </div>
@@ -26,32 +30,39 @@
       <div class="flex flex-col gap-4 mb-8">
         <div>
           <Label class="text-gray-400 text-xs">Ваше ФИО</Label>
-          <div class="text-sm mb-1">Сергей Сергеевич</div>
+          <div class="text-sm mb-1">{{ profile.name }}</div>
           <Separator />
         </div>
         <div>
           <Label class="text-gray-400 text-xs">Номер телефона</Label>
-          <div class="text-sm mb-1">+996 773 223 129</div>
+          <div class="text-sm mb-1">{{ profile.phone }}</div>
           <Separator />
         </div>
         <div>
           <Label for="email" class="text-gray-400 text-xs">Почта</Label>
-          <div class="text-sm mb-1">sergey@gmail.com</div>
+          <div class="text-sm mb-1">{{ profile.email }}</div>
           <Separator />
         </div>
         <div>
           <Label for="email" class="text-gray-400 text-xs">Текущий адрес</Label>
-          <div class="text-sm mb-1">Бишкек, район Асанбай, Английский квартал, 3 дом, 16 кв</div>
+          <div class="text-sm mb-1">{{ profile.selectedAddress?.label }}</div>
           <Separator />
         </div>
       </div>
       <div class="flex gap-2 flex-wrap-reverse">
-        <DeleteAccountDialog
-          ><Button variant="link" class="text-red-500 flex-1"
-            >Удалить аккаунт</Button
-          ></DeleteAccountDialog
+        <Button v-if="!profile.name" @click="handleOpenProfileSettingDrawer" class="flex-1"
+          >Заполнить профиль</Button
         >
-        <Button @click="handleGoHome" variant="secondary" class="flex-1">Выйти из аккаунта</Button>
+        <template v-else>
+          <DeleteAccountDialog
+            ><Button variant="link" class="text-red-500 flex-1"
+              >Удалить аккаунт</Button
+            ></DeleteAccountDialog
+          >
+          <Button @click="handleGoHome" variant="secondary" class="flex-1"
+            >Выйти из аккаунта</Button
+          >
+        </template>
       </div>
     </main>
   </div>
@@ -65,25 +76,25 @@ import Button from '@/components/ui/button/Button.vue'
 import Label from '@/components/ui/label/Label.vue'
 import Separator from '@/components/ui/separator/Separator.vue'
 import { getFromLocalStorage } from '@/composables/useLocalStorage'
+import { useProfileStore } from '@/stores/profile'
 import { Settings } from 'lucide-vue-next'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-const router = useRouter()
-const addressCount = ref<number>(0)
-const handleGoHome = () => router.push('/')
+const isProfileSettingsOpen = ref<boolean>(false)
 
-const getAddresses = () => {
-  const savedAddresses = getFromLocalStorage('addresses')
-
-  if (savedAddresses) {
-    addressCount.value = savedAddresses.length
-  }
+const handleOpenProfileSettingDrawer = () => {
+  isProfileSettingsOpen.value = true
 }
 
-onMounted(() => {
-  getAddresses()
-})
+const handleCloseProfileSettingDrawer = () => {
+  isProfileSettingsOpen.value = false
+}
+
+const router = useRouter()
+const { profile } = useProfileStore()
+const handleGoHome = () => router.push('/')
+
 </script>
 <style lang="scss">
 .profile-top {

@@ -3,9 +3,9 @@
     <DrawerTrigger class="w-full">
       <slot />
     </DrawerTrigger>
-    <DrawerContent class="min-h-[95vh]">
+    <DrawerContent>
       <DrawerHeader class="flex items-center justify-between">
-        <DrawerClose>
+        <DrawerClose @click="handleResetAddressFields">
           <span>
             <ChevronLeft color="#333" />
           </span>
@@ -13,7 +13,7 @@
         <DrawerTitle>Добавьте адрес</DrawerTitle>
         <span class="w-6"></span>
       </DrawerHeader>
-      <div class="flex flex-col flex-wrap px-4 gap-4 mb-2">
+      <DrawerDescription as="div" class="flex flex-col flex-wrap px-4 gap-4 mb-2">
         <div>
           <Label for="city, street and house" class="text-gray-400 text-xs"
             >Город, улица и дом</Label
@@ -27,36 +27,21 @@
           />
         </div>
         <div class="flex justify-between gap-4">
-          <div>
+          <div class="flex-1">
             <Label for="entrance" class="text-gray-400 text-xs">Подьезд</Label>
-            <Input
-              v-model="address.entrance"
-              class="mt-1 rounded-sm"
-              id="entrance"
-              type="number"
-            />
+            <Input v-model="address.entrance" class="mt-1 rounded-sm" id="entrance" type="number" />
           </div>
-          <div>
+          <div class="flex-1">
             <Label for="code" class="text-gray-400 text-xs">Код двери</Label>
-            <Input
-              v-model="address.code"
-              class="mt-1 rounded-sm"
-              id="code"
-              type="number"
-            />
+            <Input v-model="address.code" class="mt-1 rounded-sm" id="code" type="number" />
           </div>
         </div>
         <div class="flex justify-between gap-4">
-          <div>
+          <div class="flex-1">
             <Label for="floor" class="text-gray-400 text-xs">Этаж</Label>
-            <Input
-              v-model="address.floor"
-              class="mt-1 rounded-sm"
-              id="floor"
-              type="number"
-            />
+            <Input v-model="address.floor" class="mt-1 rounded-sm" id="floor" type="number" />
           </div>
-          <div>
+          <div class="flex-1">
             <Label for="apartment" class="text-gray-400 text-xs">Квартира</Label>
             <Input
               v-model="address.apartment"
@@ -68,24 +53,15 @@
         </div>
         <div>
           <Label for="phone" class="text-gray-400 text-xs">Телефон</Label>
-          <Input
-            v-model="address.phone"
-            class="mt-1 rounded-sm"
-            id="phone"
-            type="number"
-          />
+          <Input v-model="address.phone" class="mt-1 rounded-sm" id="phone" type="number" />
         </div>
         <div>
           <Label for="comment" class="text-gray-400 text-xs">Комментарий к адресу</Label>
-          <Textarea
-            v-model="address.comment"
-            id="comment"
-            class="mt-1 rounded-sm"
-          />
+          <Textarea v-model="address.comment" id="comment" class="mt-1 rounded-sm" />
         </div>
-      </div>
+      </DrawerDescription>
       <DrawerFooter>
-        <Button @click="handleSaveAddress" class="w-full mt-4">Сохранить</Button>
+        <Button @click="handleSaveAddress" class="w-full mt-4">Добавить</Button>
       </DrawerFooter>
     </DrawerContent>
   </Drawer>
@@ -95,7 +71,7 @@
 import Button from '@/components/ui/button/Button.vue'
 import Input from '@/components/ui/input/Input.vue'
 import Textarea from '@/components/ui/textarea/Textarea.vue'
-import { getFromLocalStorage, setToLocalStorage } from '@/composables/useLocalStorage'
+import { useProfileStore } from '@/stores/profile'
 import { Label } from '@components/ui/label'
 import {
   Drawer,
@@ -104,14 +80,16 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger
+  DrawerTrigger,
+  DrawerDescription
 } from '@ui/drawer'
 import { ChevronLeft } from 'lucide-vue-next'
 import { reactive, ref } from 'vue'
 
 const isDrawerOpen = ref(false)
 
-const address = reactive({
+let address = reactive({
+  id: '',
   cityStreetHouse: '',
   entrance: '',
   code: '',
@@ -121,19 +99,24 @@ const address = reactive({
   phone: ''
 })
 
-const emit = defineEmits(['addedAddress'])
+const { addNewAddress } = useProfileStore()
 
 const handleSaveAddress = () => {
-  const predAddresses = getFromLocalStorage('addresses')
-
-  if (predAddresses) {
-    setToLocalStorage('addresses', [...predAddresses, address])
-  } else {
-    setToLocalStorage('addresses', [address])
-  }
-
+  addNewAddress(address)
+  handleResetAddressFields()
   isDrawerOpen.value = false
+}
 
-  emit('addedAddress')
+const handleResetAddressFields = () => {
+  address = {
+    id: '',
+    cityStreetHouse: '',
+    entrance: '',
+    code: '',
+    floor: '',
+    apartment: '',
+    comment: '',
+    phone: ''
+  }
 }
 </script>
