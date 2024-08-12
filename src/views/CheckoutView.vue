@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="flex items-center justify-between bg-white rounded-b-sm mb-3 px-4 py-4">
-      <div @click="handleGoBack" class="prev cursor-pointer shadow-md rounded-[50%] p-2">
+      <div @click="handleGoBack" class="prev cursor-pointer">
         <ChevronLeft color="#333" />
       </div>
       <h3 class="text-[#333]">Доставка</h3>
     </div>
-    <main class="bg-white rounded-lg container max-w-5xl mx-auto p-4 pb-8 pt-4">
+    <main class="bg-white rounded-lg  max-w-5xl mx-auto p-4 pb-32 pt-4">
       <div class="text-center mt-2" v-if="items.length == 0">
         There are no products in the cart.
       </div>

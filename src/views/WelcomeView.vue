@@ -2,8 +2,11 @@
   <div>
     <div class="welcome">
       <div class="welcome-top text-center">
-        <div class="bg-white p-2 rounded-[50%] w-16 h-16 flex items-center justify-center">
-          <LogoIcon />
+        <div class="flex items-center gap-4">
+          <div class="bg-white p-2 rounded-[50%] w-16 h-16 flex items-center justify-center">
+            <LogoIcon />
+          </div>
+          <span class="text-primary text-xl font-black">Green Gryadka</span>
         </div>
         <h1 class="mt-8 mb-6 text-2xl font-bold">Доставим продукты к вам домой</h1>
         <p class="mb-10 text-base text-gray-500">

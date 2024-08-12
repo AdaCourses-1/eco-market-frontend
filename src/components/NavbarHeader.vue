@@ -5,11 +5,14 @@
         <div class="header__logo logo">
           <RouterLink class="logo__link" to="/">
             <LogoIcon />
-            <span>Эко-маркет</span>
+            <div class="flex flex-col">
+              <span class="text-xs">Эко-маркет</span>
+              <span class="text-md font-black">Green Gryadka</span>
+            </div>
           </RouterLink>
         </div>
         <div class="header__user user">
-          <img class="user__avatar" src="../assets/user-avatar.png" alt="Amelia Barlow">
+          <img class="user__avatar" src="../assets/user-avatar.png" alt="Amelia Barlow" />
           <div class="user__content">
             <h5 class="user__subtitle">Добро пожаловать</h5>
             <h2 class="user__name">Пользователь</h2>
@@ -24,17 +27,15 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
-import LogoIcon from './icons/LogoIcon.vue';
-import SearchInput from './SearchInput.vue';
-
+import { RouterLink } from 'vue-router'
+import LogoIcon from './icons/LogoIcon.vue'
+import SearchInput from './SearchInput.vue'
 </script>
-
 
 <style lang="scss">
 .header {
   padding: 20px 0;
-  background-color: #F3F5F7;
+  background-color: #f3f5f7;
 
   &__row {
     display: flex;
@@ -65,7 +66,7 @@ import SearchInput from './SearchInput.vue';
     &__subtitle {
       font-size: 12px;
       font-weight: 600;
-      color: var(--light-grey)
+      color: var(--light-grey);
     }
 
     &__name {

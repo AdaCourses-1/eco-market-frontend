@@ -25,7 +25,7 @@
         </AddressesDrawer>
       </div>
     </div>
-    <main class="main content-container p-4 pb-8 profile-main bg-white shadow-sm -mt-4 rounded-xl">
+    <main class="main profile-main  content-container p-4 bg-white shadow-sm -mt-4 rounded-xl">
       <h3 class="font-bold text-xl mb-2">Данные профиля</h3>
       <div class="flex flex-col gap-4 mb-8">
         <div>
@@ -103,6 +103,6 @@ const handleGoHome = () => router.push('/')
 
 .profile-main {
   height: 100%;
-  min-height: 100%;
+  min-height: 70vh;
 }
 </style>
