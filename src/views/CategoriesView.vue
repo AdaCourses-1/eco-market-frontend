@@ -23,7 +23,7 @@
         <div v-if="!searchText">
           <div
             v-for="category in categories"
-            :key="category"
+            :key="category.imageUrl"
             class="flex items-center gap-4 bg-white mb-2 p-2 px-4 rounded-sm"
           >
             <img :src="category.imageUrl" :alt="category.label" class="w-12 h-12" />
@@ -39,7 +39,7 @@
         <div v-else>
           <div
             v-for="category in filteredCategories"
-            :key="category"
+            :key="category.imageUrl"
             class="flex items-center gap-4 bg-white mb-2 p-2 px-4 rounded-sm"
           >
             <img :src="category.imageUrl" :alt="category.label" class="w-12 h-12" />
